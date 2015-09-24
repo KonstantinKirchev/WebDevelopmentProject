@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url("resources/backgroundImage.jpg") no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 50em;
+    font-family: "Tahoma", "Helvetica", "sans-serif";
+}
+#wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 530px;
+    height: 350px;
+}
+#wrapper > header > h1{
+    text-align: center;
+    color: rgb(253, 253, 254);
+}
+.left-form, .right-form{
+    display: inline-block;
+    vertical-align: top;
+    width: 240px;
+    background-color: rgba(90, 15, 12, 0.8);
+    margin: 20px 10px 20px 12px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#wrapper > main{
+    border-top: 1px solid rgb(123, 103, 72);
+}
+#wrapper > main > form.left-form > h3,
+#wrapper > main > form.right-form > h3{
+    margin: 0 auto;
+    text-align: center;
+    color: rgb(221, 183, 134);
+    margin-bottom: 10px;
+}
+#wrapper > main > form.left-form > div > span,
+#wrapper > main > form.right-form > div > span{
+    float: left;
+    font-size: 15px;
+    padding: 8px 8px 8px 8px;
+    border: 1px solid rgb(89, 53, 36);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgb(89, 53, 36);
+    top: 0;
+    color: rgb(221, 183, 134);
+}
+#wrapper > main > form.left-form > div:nth-child(3) > label{
+    float: left;
+    font-size: 15px;
+    padding: 5px 8px;
+    border: 1px solid rgb(89, 53, 36);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgb(89, 53, 36);
+    top: 0;
+    color: rgb(221, 183, 134);
+    box-sizing: border-box;
+}
+#wrapper > main > form.left-form > div > input,
+#wrapper > main > form.right-form > div > input,
+#pass{
+    width: 187px;
+    height: 33px;
+    margin-bottom: 5px;
+}
+#wrapper > main > form.left-form > button,
+#wrapper > main > form.right-form > button{
+    width: 219px;
+    padding: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(52, 138, 88, 0.7);
+    color: rgb(221, 183, 134);
+    margin-bottom: 5px;
+}
+#wrapper > main > form.left-form > button:nth-child(5){
+    margin-bottom: 8px;
+}
+#wrapper > main > form.left-form > button:nth-child(5) > span.glyphicon.glyphicon-cog{
+    top: 2px;
+}
