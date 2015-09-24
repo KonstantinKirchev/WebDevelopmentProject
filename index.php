@@ -23,15 +23,16 @@ include_once 'lib/database.php';
 include_once 'lib/auth.php';
 
 //loading master_controller
-include_once 'controllers/master_controller.php';
+//include_once 'controllers/master_controller.php';
 
-$master_controller = new \Controllers\Master_Controller();
-
+//$master_controller = new \Controllers\Master_Controller();
+var_dump($request);
 if ( ! empty( $request ) ) {
     if( 0 === strpos( $request, $request_home ) ) {
         // Clean the request
+        var_dump($request);
         $request = substr( $request, strlen( $request_home ) );
-
+        var_dump($request);
 
         // Switch to admin routing
         if( 0 === strpos( $request, 'admin' ) ) {
@@ -43,7 +44,7 @@ if ( ! empty( $request ) ) {
 
         // Fetch the controller, method and params if any
         $components = explode( DX_DS, $request, 3 );
-
+        var_dump($components);
         // Get controller and such
         if ( 1 < count( $components ) ) {
             list( $controller, $method ) = $components;
@@ -76,5 +77,5 @@ if ( isset( $controller ) && file_exists( 'controllers/' . $controller . '.php' 
     }
 } else {
 
-    $master_controller->home();
+    //$master_controller->home();
 }
