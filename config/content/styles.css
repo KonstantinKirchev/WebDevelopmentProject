@@ -1,0 +1,93 @@
+body>header>a {
+    display: block;
+    text-align: center;
+}
+body > header{
+    border-bottom: 1px solid black;
+}
+
+ul.menu {
+    vertical-align: top;
+    margin: 5px 0 0 0;
+    padding: 0;
+    display: inline-block;
+}
+
+ul.menu li {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+}
+
+ul.menu li:hover {
+    background: #ccc;
+}
+
+ul.menu li a {
+    text-decoration: none;
+    font-size: 3em;
+}
+
+body > a{
+    margin: 0 auto;
+}
+body>footer {
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 3em;
+    border-top: 1px solid black;
+}
+
+ul.info-messages {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #cfc;
+}
+
+ul.info-messages li {
+    display: block;
+}
+
+ul.error-messages {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #fcc;
+}
+
+ul.error-messages li {
+    display: block;
+}
+body > table > tbody > tr > td{
+    padding: 0 40px 0 40px;
+    text-align: center;
+}
+body > table,
+body > table > tbody > tr,
+body > table > tbody > tr > th,
+body > table > tbody > tr > td{
+    border: 1px solid black;
+}
+body > a {
+    font-size: 3em;
+    text-decoration: none;
+}
+body{
+    background-image: url("images/groceries.jpg");
+}
+#logged-in-info{
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+}
+body > h1,
+body > h2{
+    text-align: center;
+}
+#logged-in-info > h2,
+#logged-in-info > form{
+    display: inline-block;
+}
+   
