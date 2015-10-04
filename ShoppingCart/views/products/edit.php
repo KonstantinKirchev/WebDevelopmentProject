@@ -1,24 +1,42 @@
-<h1>Edit Existing Product</h1>
+<?php /** @var Models\ViewModels\UserViewModel */
+include "Framework/ViewHelpers/FormViewHelper.php";
+include "Framework/ViewHelpers/Elements/Element.php";
+include "Framework/ViewHelpers/Elements/TextField.php";
+include "Framework/ViewHelpers/Elements/PasswordField.php";
+include "Framework/ViewHelpers/Elements/Submit.php";?>
 
-<?php if ($this->product) { ?>
-    <form method="post" action="/products/edit/<?= $this->product['Id'] ?>">
-        Product name:
-        <input type="text" name="productName"
-               value="<?= htmlspecialchars($this->product['ProductName']) ?>" />
-        <br/>
-        Product quantity:
-        <input type="text" name="quantity"
-               value="<?= htmlspecialchars($this->product['Quantity']) ?>" />
-        <br/>
-        Product price:
-        <input type="text" name="price"
-               value="<?= htmlspecialchars($this->product['Price']) ?>" />
-        <br/>
-        Product category:
-        <input type="text" name="categoryId"
-               value="<?= htmlspecialchars($this->product['Category_Id']) ?>" />
-        <br/>
-        <input type="submit" value="Edit" />
-        <a href="/products">Cancel</a>
-    </form>
-<?php } ?>
+<h1>Edit Existing Product</h1>
+<section class="bg-3">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <?=
+            \Framework\ViewHelpers\FormViewHelper::init()
+                ->setAction("/products/edit/" . $this->product['Id'])
+                ->setMethod("post")
+                ->initTextField()
+                ->setName("productName")
+                ->setAttribute("value", htmlspecialchars($this->product['ProductName']))
+                ->create()
+                ->initTextField()
+                ->setName("quantity")
+                ->setAttribute("value", htmlspecialchars($this->product['Quantity']))
+                ->create()
+                ->initTextField()
+                ->setName("price")
+                ->setAttribute("value", htmlspecialchars($this->product['Price']))
+                ->create()
+                ->initTextField()
+                ->setName("categoryId")
+                ->setAttribute("value", htmlspecialchars($this->product['Category_Id']))
+                ->create()
+                ->initSubmit()
+                ->setValue("Edit")
+                ->create()
+                ->render();
+            ?>
+            <a href="/products">Cancel</a>
+        </div>
+    </div>
+</section>
+<br/>
+

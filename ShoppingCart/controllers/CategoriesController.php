@@ -3,32 +3,31 @@
 
 class CategoriesController extends BaseController
 {
-    private $categoriesModel;
-    private $productsModel;
+    private $db;
 
     public function onInit()
     {
         $this->title = 'Categories page';
-        $this->categoriesModel = new CategoriesModel();
-        $this->productsModel = new ProductsModel();
+        $this->db = new CategoriesModel();
     }
 
     public function index()
     {
-        $this->categories = $this->categoriesModel->getAll();
+        $this->authorize();
+        $this->categories = $this->db->getAll();
     }
 
-    public function categoryId($id)
+    public function view($id)
     {
-        $this->products = $this->productsModels->getAllFromCategory($id);
+        $this->products = $this->db->getAllFromCategory($id);
     }
 
     public function create()
     {
         if ($this->isPost()) {
             $categoryName = $_POST['CategoryName'];
-            if ($this->categoriesModel->create($categoryName)) {
-                $this->addCreateMessage("Category created.");
+            if ($this->db->create($categoryName)) {
+                $this->addInfoMessage("Category created.");
                 $this->redirect("categories");
             } else {
                 $this->addErrorMessage("Cannot create category.");
@@ -38,8 +37,8 @@ class CategoriesController extends BaseController
 
     public function delete($id)
     {
-        if($this->categories = $this->categoriesModel->delete($id)){
-            $this->addDeleteMessage("Category deleted.");
+        if($this->categories = $this->db->delete($id)){
+            $this->addInfoMessage("Category deleted.");
             $this->redirect("categories");
         }else{
             $this->addErrorMessage("Cannot delete category.");
@@ -52,7 +51,7 @@ class CategoriesController extends BaseController
         if ($this->isPost()) {
             // Edit the category in the database
             $categoryName = $_POST['categoryName'];
-            if ($this->categoriesModel->edit($id, $categoryName)) {
+            if ($this->db->edit($id, $categoryName)) {
                 $this->addInfoMessage("Category edited.");
                 $this->redirect("categories");
             } else {
@@ -61,7 +60,7 @@ class CategoriesController extends BaseController
         }
 
         // Display edit author form
-        $this->category = $this->categoriesModel->find($id);
+        $this->category = $this->db->find($id);
         if (!$this->category) {
             $this->addErrorMessage("Invalid category.");
             $this->redirect("categories");

@@ -1,16 +1,27 @@
 <?php
 
 abstract class BaseController {
+
     protected $controller;
     protected $action;
     protected $layout = DEFAULT_LAYOUT;
     protected $viewBag = [];
     protected $viewRendered = false;
+    protected $isPost = false;
+    protected $isLoggedIn = false;
 
     public function __construct($controller, $action) {
         $this->controller = $controller;
         $this->action = $action;
         $this->onInit();
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $this->isPost = true;
+        }
+
+        if(isset($_SESSION['username'])){
+            $this->isLoggedIn = true;
+        }
     }
 
     public function __get($name) {
@@ -94,23 +105,24 @@ abstract class BaseController {
         $this->addMessage(INFO_MESSAGES_SESSION_KEY, $infoMsg);
     }
 
-    protected function isLoggedIn() {
-        return isset($_SESSION['username']);
-    }
+//    protected function isLoggedIn() {
+//        return isset($_SESSION['username']);
+//    }
 
-    protected function isAdmin() {
-        return isset($_SESSION['isAdmin']);
-    }
+//    protected function isAdmin() {
+//        return isset($_SESSION['isAdmin']);
+//    }
 
     protected function authorize() {
-        if (! $this->isLoggedIn()) {
-            $this->redirect("users", "login");
+        if (! $this->isLoggedIn) {
+            $this->addErrorMessage("Please login first!");
+            $this->redirect("account", "login");
         }
     }
 
-    protected function authorizeAdmin() {
-        if (! $this->isAdmin()) {
-            die('Administrator account is required!');
-        }
-    }
+//    protected function authorizeAdmin() {
+//        if (! $this->isAdmin()) {
+//            die('Administrator account is required!');
+//        }
+//    }
 }

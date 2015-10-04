@@ -7,30 +7,38 @@ include_once('includes/config.php');
 // Extract the $controllerName, $actionName and $params from the HTTP request
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $requestParts = explode('/', $requestPath);
-//var_dump($requestParts);
+
 $controllerName = DEFAULT_CONTROLLER;
 if (count($requestParts) >= 2 && $requestParts[1] != '') {
     $controllerName = strtolower($requestParts[1]);
-    if (! preg_match('/^[a-zA-Z0-9_]+$/', $controllerName)) {
-        die('Invalid controller name. Use letters, digits and underscore only.');
+    if (!preg_match('/^[a-zA-Z0-9_]+$/', $controllerName)) {
+        throw new \Exception('Invalid controller name. Use letters, digits and underscore only.');
     }
 }
-//var_dump($controllerName);
+
 $actionName = DEFAULT_ACTION;
 if (count($requestParts) >= 3 && $requestParts[2] != '') {
     $actionName = $requestParts[2];
-    if (! preg_match('/^[a-zA-Z0-9_]+$/', $actionName)) {
-        die('Invalid action name. Use letters, digits and underscore only.');
+    if (!preg_match('/^[a-zA-Z0-9_]+$/', $actionName)) {
+        throw new \Exception('Invalid action name. Use letters, digits and underscore only.');
     }
 }
-//var_dump($actionName);
+
+//$namespace = null;
+//if (count($requestParts) >= 3 && $requestParts[1] != '') {
+//    $namespace = strtolower($requestParts[1]);
+//    if (!preg_match('/^[A-Z][a-zA-Z0-9_]+$/', $controllerName)) {
+//        throw new \Exception('Invalid namespace.');
+//    }
+//}
+
 $params = [];
 if (count($requestParts) >= 4) {
     $params = array_splice($requestParts, 3);
 }
 
 
- //Load the controller and execute the action
+//Load the controller and execute the action
 $controllerClassName = ucfirst($controllerName) . 'Controller';
 
 if (class_exists($controllerClassName)) {
@@ -40,16 +48,15 @@ if (class_exists($controllerClassName)) {
         call_user_func_array(array($controller, $actionName), $params);
         $controller->renderView();
     } else {
-        die ('Error: cannot find action "' . $actionName . '" in controller ' . $controllerClassName);
+        throw new \Exception ('Error: cannot find action "' . $actionName . '" in controller ' . $controllerClassName);
     }
 } else {
     $controllerFileName = 'controllers/' . $controllerClassName . '.php';
-    die ('Error: cannot find controller: ' . $controllerFileName);
+    throw new \Exception ('Error: cannot find controller: ' . $controllerFileName);
 }
-//var_dump($controllerClassName);
-//var_dump($controllerFileName);
 
-function __autoload($class_name) {
+function __autoload($class_name)
+{
     if (file_exists("controllers/$class_name.php")) {
         include "controllers/$class_name.php";
     }

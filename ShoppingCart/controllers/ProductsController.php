@@ -3,23 +3,19 @@
 
 class ProductsController extends BaseController
 {
-    private $productsModel;
+    private $db;
 
     public function onInit()
     {
         $this->title = 'Products page';
-        $this->productsModel = new ProductsModel();
+        $this->db = new ProductsModel();
     }
 
     public function index()
     {
-//        $this->products = array(
-//            array('id' => 10, 'name' => 'Tomatoes', 'quantity' => '100', 'price' => 2.55 ),
-//            array('id' => 20, 'name' => 'Cucumbers', 'quantity' => '120', 'price' => 3.55 ),
-//            array('id' => 30, 'name' => 'Peppers', 'quantity' => '160', 'price' => 2.30 ),
-//            array('id' => 40, 'name' => 'Potatoes', 'quantity' => '200', 'price' => 1.75 ),
-//        );
-        $this->products = $this->productsModel->getAll();
+        $this->authorize();
+
+        $this->products = $this->db->getAll();
     }
 
     public function create()
@@ -29,7 +25,7 @@ class ProductsController extends BaseController
             $quantity = $_POST['quantity'];
             $price = $_POST['price'];
             $category = $_POST['categoryId'];
-            if ($this->productsModel->create($productName, $quantity, $price, $category)) {
+            if ($this->db->create($productName, $quantity, $price, $category)) {
                 $this->addInfoMessage("Product created.");
                 $this->redirect("products");
             } else {
@@ -41,12 +37,12 @@ class ProductsController extends BaseController
     public function edit($id)
     {
         if ($this->isPost()) {
-            // Edit the product in the database
+
             $productName = $_POST['productName'];
             $quantity = $_POST['quantity'];
             $price = $_POST['price'];
             $category = $_POST['categoryId'];
-            if ($this->productsModel->edit($id, $productName, $quantity, $price, $category)) {
+            if ($this->db->edit($id, $productName, $quantity, $price, $category)) {
                 $this->addInfoMessage("Product edited.");
                 $this->redirect("products");
             } else {
@@ -54,8 +50,7 @@ class ProductsController extends BaseController
             }
         }
 
-        // Display edit product form
-        $this->product = $this->productsModel->find($id);
+        $this->product = $this->db->find($id);
         if (!$this->product) {
             $this->addErrorMessage("Invalid product.");
             $this->redirect("products");
@@ -64,7 +59,7 @@ class ProductsController extends BaseController
 
     public function delete($id)
     {
-        if($this->products = $this->productsModel->delete($id)){
+        if($this->products = $this->db->delete($id)){
             $this->addInfoMessage("Product deleted.");
             $this->redirect("products");
         }else{

@@ -1,4 +1,4 @@
-<footer>(c) 2015 Food Store</footer>
+<footer>(c) The Food Store 2015</footer>
 </body>
 
 </html>

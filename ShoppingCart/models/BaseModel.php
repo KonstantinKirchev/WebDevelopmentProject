@@ -3,7 +3,7 @@
 
 abstract class BaseModel
 {
-    protected static $db;
+    public static $db;
 
     public function __construct() {
         if (self::$db == null) {

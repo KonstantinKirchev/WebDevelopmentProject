@@ -12,7 +12,7 @@ class CategoriesModel extends BaseModel
         $statement = self::$db->prepare("SELECT * FROM Products WHERE Category_Id = ? ORDER BY Id");
         $statement->bind_param("i", $id);
         $statement->execute();
-        return $statement->get_result()->fetch_assoc();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function find($id) {
@@ -43,13 +43,13 @@ class CategoriesModel extends BaseModel
     }
 
     public function edit($id, $name) {
-    if ($name == '') {
-        return false;
+        if ($name == '') {
+            return false;
+        }
+        $statement = self::$db->prepare(
+            "UPDATE Categories SET CategoryName = ? WHERE id = ?");
+        $statement->bind_param("si", $name, $id);
+        $statement->execute();
+        return $statement->errno == 0;
     }
-    $statement = self::$db->prepare(
-        "UPDATE Categories SET CategoryName = ? WHERE id = ?");
-    $statement->bind_param("si", $name, $id);
-    $statement->execute();
-    return $statement->errno == 0;
-}
 }

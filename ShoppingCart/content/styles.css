@@ -1,10 +1,9 @@
-body>header {
-    background: #eee;
-}
-
 body>header>a {
     display: block;
     text-align: center;
+}
+body > header{
+    border-bottom: 1px solid black;
 }
 
 ul.menu {
@@ -26,15 +25,18 @@ ul.menu li:hover {
 
 ul.menu li a {
     text-decoration: none;
-    font-size: 3em;
+    font-size: 2em;
 }
 
+body > a{
+    margin: 0 auto;
+}
 body>footer {
-    background: #eee;
     margin-top: 10px;
     padding: 5px;
     text-align: center;
     font-size: 3em;
+    border-top: 1px solid black;
 }
 
 ul.info-messages {
@@ -58,3 +60,52 @@ ul.error-messages {
 ul.error-messages li {
     display: block;
 }
+body > table > tbody > tr > td{
+    padding: 0 40px 0 40px;
+    text-align: center;
+}
+body > table,
+body > table > tbody > tr,
+body > table > tbody > tr > th,
+body > table > tbody > tr > td{
+    border: 1px solid black;
+}
+body > a {
+    font-size: 3em;
+    text-decoration: none;
+}
+body{
+    background-image: url("images/groceries.jpg");
+}
+#logged-in-info{
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+}
+body > h1,
+body > h2{
+    text-align: center;
+}
+#logged-in-info > h2,
+#logged-in-info > form{
+    display: inline-block;
+}
+body > form,
+body > form > input[type="submit"]{
+    text-align: center;
+}
+body > table{
+    margin: 0 auto;
+}
+body > div > a{
+    margin: 0 auto;
+    font-size: 2em;
+    text-decoration: none;
+}
+body > div{
+    text-align: center;
+}
+body > section{
+    text-align: center;
+}
+   

@@ -18,6 +18,19 @@ class ProductsModel extends BaseModel
         if ($productName == '' || $quantity == '' || $price == '' || $category == '') {
             return false;
         }
+
+        if(preg_match('/[^A-Za-z\s+]+/', $productName)){
+            return false;
+        }
+
+        if(preg_match('/[^0-9]+/', $quantity)){
+            return false;
+        }
+
+        if(preg_match('/[^0-9.]+/', $price)){
+            return false;
+        }
+
         $statement = self::$db->prepare(
             "INSERT INTO Products VALUES(NULL, ?, ?, ?, ?)");
         $statement->bind_param("sidi", $productName, $quantity, $price, $category);
@@ -29,6 +42,19 @@ class ProductsModel extends BaseModel
         if ($productName == '' && $quantity == '' && $price == '' && $category == '') {
             return false;
         }
+
+        if(preg_match('/[^A-Za-z\s+]+/', $productName)){
+            return false;
+        }
+
+        if(preg_match('/[^0-9]+/', $quantity)){
+            return false;
+        }
+
+        if(preg_match('/[^0-9.]+/', $price)){
+            return false;
+        }
+
         $statement = self::$db->prepare(
             "UPDATE Products SET ProductName = ?, Quantity = ?, Price = ?, Category_Id = ? WHERE Id = ?");
         $statement->bind_param("sidii", $productName, $quantity, $price, $category, $id);
