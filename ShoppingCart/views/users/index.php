@@ -3,7 +3,6 @@
     <tr>
         <th>ID</th>
         <th>Username</th>
-<!--        <th>Password</th>-->
         <th>Balance</th>
         <th colspan="4">Action</th>
     </tr>
@@ -11,7 +10,6 @@
         <tr>
             <td><?= htmlspecialchars($user['Id']) ?></td>
             <td><?= htmlspecialchars($user['Username']) ?></td>
-<!--            <td>--><?//= htmlspecialchars($user['Password']) ?><!--</td>-->
             <td><?= htmlspecialchars($user['Balance']) ?></td>
             <td><a href="/users/edit/<?=$user['Id'] ?>">[Edit]</td>
             <td><a href="/users/delete/<?=$user['Id'] ?>">[Delete]</td>

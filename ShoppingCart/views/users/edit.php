@@ -1,32 +1,52 @@
+<?php
+include "Framework/ViewHelpers/FormViewHelper.php";
+include "Framework/ViewHelpers/Elements/Element.php";
+include "Framework/ViewHelpers/Elements/TextField.php";
+include "Framework/ViewHelpers/Elements/PasswordField.php";
+include "Framework/ViewHelpers/Elements/Submit.php";?>
+
 <h1>Edit Existing User</h1>
 
 <?php if ($this->user) { ?>
-    <form method="post" action="/users/edit/<?= $this->user['Id'] ?>">
-        User name:
-        <input type="text" name="userName"
-               value="<?= htmlspecialchars($this->user['Username']) ?>" />
-        <br/>
-        Password:
-        <input type="text" name="password"
-               value="<?= htmlspecialchars($this->user['Password']) ?>" />
-        <br/>
-        Balance:
-        <input type="text" name="balance"
-               value="<?= htmlspecialchars($this->user['Balance']) ?>" />
-        <br/>
-        Is Admin:
-        <input type="text" name="is_admin"
-               value="<?= htmlspecialchars($this->user['is_admin']) ?>" />
-        <br/>
-        Is Editor:
-        <input type="text" name="is_editor"
-               value="<?= htmlspecialchars($this->user['is_editor']) ?>" />
-        <br/>
-        Is Ban:
-        <input type="text" name="is_ban"
-               value="<?= htmlspecialchars($this->user['is_ban']) ?>" />
-        <br/>
-        <input type="submit" value="Edit" />
-        <a href="/users">Cancel</a>
-    </form>
+    <section class="bg-3">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <?=
+                \Framework\ViewHelpers\FormViewHelper::init()
+                    ->setAction("/users/edit/" . $this->user['Id'])
+                    ->setMethod("post")
+                    ->initTextField()
+                    ->setName("userName")
+                    ->setAttribute("value", htmlspecialchars($this->user['Username']))
+                    ->create()
+                    ->initTextField()
+                    ->setName("password")
+                    ->setAttribute("value", htmlspecialchars($this->user['Password']))
+                    ->create()
+                    ->initTextField()
+                    ->setName("balance")
+                    ->setAttribute("value", htmlspecialchars($this->user['Balance']))
+                    ->create()
+                    ->initTextField()
+                    ->setName("is_admin")
+                    ->setAttribute("value", htmlspecialchars($this->user['is_admin']))
+                    ->create()
+                    ->initTextField()
+                    ->setName("is_editor")
+                    ->setAttribute("value", htmlspecialchars($this->user['is_editor']))
+                    ->create()
+                    ->initTextField()
+                    ->setName("is_ban")
+                    ->setAttribute("value", htmlspecialchars($this->user['is_ban']))
+                    ->create()
+                    ->initSubmit()
+                    ->setValue("Edit")
+                    ->create()
+                    ->render();
+                ?>
+                <a href="/users">Cancel</a>
+            </div>
+        </div>
+    </section>
+    <br/>
 <?php } ?>

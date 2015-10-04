@@ -44,7 +44,7 @@ class ProductsController extends BaseController
             $category = $_POST['categoryId'];
             if ($this->db->edit($id, $productName, $quantity, $price, $category)) {
                 $this->addInfoMessage("Product edited.");
-                $this->redirect("products");
+                $this->redirectToUrl("/products");
             } else {
                 $this->addErrorMessage("Cannot edit product.");
             }
@@ -61,7 +61,7 @@ class ProductsController extends BaseController
     {
         if($this->products = $this->db->delete($id)){
             $this->addInfoMessage("Product deleted.");
-            $this->redirect("products");
+            $this->redirectToUrl("/products");
         }else{
             $this->addErrorMessage("Cannot delete product.");
         }

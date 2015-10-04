@@ -20,7 +20,7 @@ class UsersController extends BaseController
     {
         if($this->users = $this->db->delete($id)){
             $this->addInfoMessage("User deleted.");
-            $this->redirect("users");
+            $this->redirectToUrl("/users");
         }else{
             $this->addErrorMessage("Cannot delete user.");
         }
@@ -39,7 +39,7 @@ class UsersController extends BaseController
 
             if ($this->db->edit($id, $userName, $password, $balance, $is_admin, $is_editor, $is_ban)) {
                 $this->addInfoMessage("User edited.");
-                $this->redirect("users");
+                $this->redirectToUrl("/users");
             } else {
                 $this->addErrorMessage("Cannot edit user.");
             }

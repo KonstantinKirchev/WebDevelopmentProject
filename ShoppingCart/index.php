@@ -24,14 +24,6 @@ if (count($requestParts) >= 3 && $requestParts[2] != '') {
     }
 }
 
-//$namespace = null;
-//if (count($requestParts) >= 3 && $requestParts[1] != '') {
-//    $namespace = strtolower($requestParts[1]);
-//    if (!preg_match('/^[A-Z][a-zA-Z0-9_]+$/', $controllerName)) {
-//        throw new \Exception('Invalid namespace.');
-//    }
-//}
-
 $params = [];
 if (count($requestParts) >= 4) {
     $params = array_splice($requestParts, 3);

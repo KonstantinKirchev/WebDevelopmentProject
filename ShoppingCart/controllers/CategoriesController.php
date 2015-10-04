@@ -28,7 +28,7 @@ class CategoriesController extends BaseController
             $categoryName = $_POST['CategoryName'];
             if ($this->db->create($categoryName)) {
                 $this->addInfoMessage("Category created.");
-                $this->redirect("categories");
+                $this->redirectToUrl("/categories");
             } else {
                 $this->addErrorMessage("Cannot create category.");
             }
@@ -39,7 +39,7 @@ class CategoriesController extends BaseController
     {
         if($this->categories = $this->db->delete($id)){
             $this->addInfoMessage("Category deleted.");
-            $this->redirect("categories");
+            $this->redirectToUrl("/categories");
         }else{
             $this->addErrorMessage("Cannot delete category.");
         }
@@ -53,7 +53,7 @@ class CategoriesController extends BaseController
             $categoryName = $_POST['categoryName'];
             if ($this->db->edit($id, $categoryName)) {
                 $this->addInfoMessage("Category edited.");
-                $this->redirect("categories");
+                $this->redirectToUrl("/categories");
             } else {
                 $this->addErrorMessage("Cannot edit category.");
             }
