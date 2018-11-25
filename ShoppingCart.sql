@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `shoppingcart`.`Users` (
   `Username` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `Balance` DECIMAL NOT NULL,
+  `is_admin` BOOLEAN,
+  `is_editor` BOOLEAN,
   UNIQUE INDEX `Username_UNIQUE` (`Username` ASC))
 ENGINE = InnoDB;
 
